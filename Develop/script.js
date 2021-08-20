@@ -26,7 +26,7 @@ var lengthCheck = function() {
   var promptLength = window.prompt("Please enter a password length, 8 to 128 characters.");
   
   if (promptLength === null || promptLength === "") {
-    window.alert("null or empty input!");
+    window.alert("You need to provide a valid number!");
     return lengthCheck();
   }
 
@@ -96,13 +96,6 @@ function generatePassword() {
   
   confirmCharacters();
   
-  //console.log(length);
-  //console.log(includeLower);
-  //console.log(includeUpper);
-  //console.log(includeNumber);
-  //console.log(includeSymbol);
-  //console.log(check);
-
   //empty array to hold allowed characters
   var include = [];
 
@@ -123,20 +116,14 @@ function generatePassword() {
   //empty password
   var password = '';
   
-  //var count = 0;
   //loop thru length
   for (var i = 0; i < length; i++) {
     //select random charactor from include array
     var randomCharacter = Math.floor(Math.random() * include.length);
-    
-    //console.log(randomCharacter);
 
     //add to password
     password += include[randomCharacter];
 
-    //count += 1;
-    //console.log(count);
-    //console.log(password);
   }
   return password;
 }
