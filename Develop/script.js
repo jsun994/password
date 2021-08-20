@@ -118,7 +118,7 @@ function generatePassword() {
   
   //loop thru length
   for (var i = 0; i < length; i++) {
-    //select random charactor from include array
+    //select random character from include array
     var randomCharacter = Math.floor(Math.random() * include.length);
 
     //add to password
