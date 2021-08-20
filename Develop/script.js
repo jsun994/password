@@ -1,69 +1,146 @@
 // Assignment code here
 
 //length 8 - 128, loop
-//at least one character type, 15 possible choices
-//lower, upper, number, symbol
+//at least one character type
 
-//lower, upper
-//lower, number
-//lower, symbol
-//upper, number
-//upper, symbol
-//number, symbol
+var lowers = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+  'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+  'v', 'w', 'x', 'y', 'z'
+  ];
 
-//lower, upper, number
-//lower, upper, symbol
-//lower, number, symbol
-//upper, number, symbol
+var uppers = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+  'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+  'V', 'W', 'X', 'Y', 'Z'
+  ];
 
-//lower, upper, number, symbol
+var numbers = ['0','1','2','3','4','5','6','7','8','9'];
+
+//length is 33
+var symbols = [' ', '!', '\"', '#', '$', '%', '&', '\'', '(', ')',
+  '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?',
+  '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'
+  ];
+
+//check for valid length
+var lengthCheck = function() {
+  var promptLength = window.prompt("Please enter a password length, 8 to 128 characters.");
+  
+  //cancel
+  if (promptLength === null) {
+    return;
+  }
+
+  //ok
+  if (promptLength === "") {
+    window.alert("You need to provide a valid number!");
+    return lengthCheck();
+  }
+
+  //check whitespace
+  if (/\s/.test(promptLength)) {
+    window.alert("You need to provide a valid number!");
+    return lengthCheck();
+  }
+
+  //is not a number
+  if (isNaN(promptLength) === true) {
+    window.alert("You need to provide a valid number!");
+    return lengthCheck();
+  }
+
+  var promptLength = parseInt(promptLength);
+  
+  if (promptLength < 8 || promptLength > 128) {
+    window.alert("You need to provide a length no less than 8 and no greater than 128.");
+    return lengthCheck();
+  }
+  else {
+    return promptLength;
+  }
+}
+
+//to check for at least one type of characters
+var includeLower = false;
+var includeUpper = false;
+var includeNumber = false;
+var includeSymbol = false;
+var check = 0;
+
+var confirmCharacters = function () {
+
+  var confirmLower = window.confirm("Include lower case characters?");
+  if (confirmLower) {
+    includeLower = true;
+    check += 1;
+  }
+  var confirmUpper = window.confirm("Include upper case characters?");
+  if (confirmUpper) {
+    includeUpper = true;
+    check += 1;
+  }
+  var confirmNumber = window.confirm("Include numbers?");
+  if (confirmNumber) {
+    includeNumber = true;
+    check += 1;
+  }
+  var confirmSymbol = window.confirm("Include symbols?");
+  if (confirmSymbol) {
+    includeSymbol= true;
+    check += 1;
+  }
+
+  //if all false
+  if (check === 0) {
+    window.alert("Please include at least one type of characters.");
+    confirmCharacters();
+  }
+}
 
 function generatePassword() {
-  //var promptLength = window.prompt("password length");
-  //var confirmLower = window.confirm("lower?");
-  //console.log(promptLength);
-
-  //confirm character types, if all false, give error
-  //console.log(confirmLower);
-}
-
-function generateLower() {
-  var lowers = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-  'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
-  'v', 'w', 'x', 'y', 'z'];
-
-  return lowers[Math.floor(Math.random() * lowers.length)];
-}
-
-function generateUpper() {
-  var uppers = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-  'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-  'V', 'W', 'X', 'Y', 'Z'];
-
-  return uppers[Math.floor(Math.random() * uppers.length)];
-}
-
-function generateNumber() {
-  //length is 10
-  var numbers = ['0','1','2','3','4','5','6','7','8','9'];
-  //math.floor rounds down, 9 is stored in number array[9]
-  //math.random cannot generate 1
-
-  return numbers[Math.floor(Math.random() * numbers.length)];
-}
-
-function generateSymbol() {
-  //length is 33
-  var symbols = [' ', '!', '\"', '#', '$', '%', '&', '\'', '(', ')',
-  '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?',
-  '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'];
   
-  //to test if all symbol displays
-  /*for (var i = 0; i < symbols.length; i++) {
-    console.log(symbols[i]);
-  }*/
+  var length = lengthCheck();
+  
+  confirmCharacters();
+  
+  //console.log(length);
+  console.log(includeLower);
+  console.log(includeUpper);
+  console.log(includeNumber);
+  console.log(includeSymbol);
+  //console.log(check);
 
-  return symbols[Math.floor(Math.random() * symbols.length)];
+  //empty array to hold allowed characters
+  var include = [];
+
+  //concat allowed character arrays
+  if (includeLower === true) {
+    include = include.concat(lowers);
+  }
+  if (includeUpper === true) {
+    include = include.concat(uppers);
+  }
+  if (includeNumber === true) {
+    include = include.concat(numbers);
+  }
+  if (includeSymbol === true) {
+    include = include.concat(symbols);
+  }
+
+  //empty password
+  var password = '';
+  
+  //loop thru length
+  for (var i = 0; i < length; i++) {
+    //select random charactor from include array
+    var randomCharacter = Math.floor(Math.random() * include.length);
+    //add to password
+    console.log(randomCharacter);
+    
+    password += include[randomCharacter];
+
+    console.log(password);
+  }
+  return password;
 }
 
 // Get references to the #generate element
@@ -76,6 +153,12 @@ function writePassword() {
 
   passwordText.value = password;
 
+  //reset global
+  includeLower = false;
+  includeUpper = false;
+  includeNumber = false;
+  includeSymbol = false;
+  check = 0;
 }
 
 // Add event listener to generate button
