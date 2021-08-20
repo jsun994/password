@@ -15,8 +15,8 @@ var uppers = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
 
 var numbers = ['0','1','2','3','4','5','6','7','8','9'];
 
-//length is 33
-var symbols = [' ', '!', '\"', '#', '$', '%', '&', '\'', '(', ')',
+//length is 32, excluding the space character
+var symbols = ['!', '\"', '#', '$', '%', '&', '\'', '(', ')',
   '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?',
   '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'
   ];
@@ -25,14 +25,8 @@ var symbols = [' ', '!', '\"', '#', '$', '%', '&', '\'', '(', ')',
 var lengthCheck = function() {
   var promptLength = window.prompt("Please enter a password length, 8 to 128 characters.");
   
-  //cancel
-  if (promptLength === null) {
-    return;
-  }
-
-  //ok
-  if (promptLength === "") {
-    window.alert("You need to provide a valid number!");
+  if (promptLength === null || promptLength === "") {
+    window.alert("null or empty input!");
     return lengthCheck();
   }
 
@@ -103,10 +97,10 @@ function generatePassword() {
   confirmCharacters();
   
   //console.log(length);
-  console.log(includeLower);
-  console.log(includeUpper);
-  console.log(includeNumber);
-  console.log(includeSymbol);
+  //console.log(includeLower);
+  //console.log(includeUpper);
+  //console.log(includeNumber);
+  //console.log(includeSymbol);
   //console.log(check);
 
   //empty array to hold allowed characters
@@ -129,16 +123,20 @@ function generatePassword() {
   //empty password
   var password = '';
   
+  //var count = 0;
   //loop thru length
   for (var i = 0; i < length; i++) {
     //select random charactor from include array
     var randomCharacter = Math.floor(Math.random() * include.length);
-    //add to password
-    console.log(randomCharacter);
     
+    //console.log(randomCharacter);
+
+    //add to password
     password += include[randomCharacter];
 
-    console.log(password);
+    //count += 1;
+    //console.log(count);
+    //console.log(password);
   }
   return password;
 }
