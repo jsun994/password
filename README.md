@@ -14,5 +14,5 @@ https://jsun994.github.io/password/
 ## Description
 The password
 
-![ss1](screenshot.png)
-![ss2](screenshot1.png)
+![ss1](./screenshot.png)
+![ss2](./screenshot1.png)
