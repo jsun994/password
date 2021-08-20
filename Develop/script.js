@@ -1,8 +1,33 @@
 // Assignment code here
-var randomPassword = {
-};
+
+//length 8 - 128, loop
+//at least one character type, 15 possible choices
+//lower, upper, number, symbol
+
+//lower, upper
+//lower, number
+//lower, symbol
+//upper, number
+//upper, symbol
+//number, symbol
+
+//lower, upper, number
+//lower, upper, symbol
+//lower, number, symbol
+//upper, number, symbol
+
+//lower, upper, number, symbol
 
 function generatePassword() {
+  //var promptLength = window.prompt("password length");
+  //var confirmLower = window.confirm("lower?");
+  //console.log(promptLength);
+
+  //confirm character types, if all false, give error
+  //console.log(confirmLower);
+}
+
+function generateLower() {
   var lowers = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
   'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
   'v', 'w', 'x', 'y', 'z'];
